@@ -19,14 +19,17 @@ public class CameraController : MonoBehaviour
 
     private void HandleMouseInput()
     {
-        float mouseX = Input.GetAxisRaw("Mouse X");
-        float mouseY = Input.GetAxisRaw("Mouse Y");
+        if (Input.GetMouseButton(1))
+        {
+            float mouseX = Input.GetAxisRaw("Mouse X");
+            float mouseY = Input.GetAxisRaw("Mouse Y");
 
-        yRot += mouseX * sensitivity;
-        xRot -= mouseY * sensitivity;
+            yRot += mouseX * sensitivity;
+            xRot -= mouseY * sensitivity;
 
-        xRot = Mathf.Clamp(xRot, minY, maxY);
+            xRot = Mathf.Clamp(xRot, minY, maxY);
 
-        transform.rotation = Quaternion.Euler(xRot, yRot, 0);
+            transform.rotation = Quaternion.Euler(xRot, yRot, 0);
+        }
     }
 }

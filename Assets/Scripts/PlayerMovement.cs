@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     CharacterController characterController;
 
@@ -18,9 +18,6 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
-
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
     }
 
     private void Update()
@@ -35,6 +32,8 @@ public class Player : MonoBehaviour
 
         ApplyMovement();
         ApplyGravity();
+
+        RotateWithCamera();
     }
 
     private void ReadMovementInputs()
@@ -102,5 +101,10 @@ public class Player : MonoBehaviour
         {
             characterController.Move(targetMoveDirection * moveSpeed * Time.deltaTime);
         }
+    }
+
+    private void RotateWithCamera()
+    {
+        transform.rotation = Quaternion.Euler(0f, Camera.main.transform.eulerAngles.y, 0f);
     }
 }
